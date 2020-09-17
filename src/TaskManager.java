@@ -15,6 +15,7 @@ public class TaskManager {
 
     public void addTask(String taskText) {
         Task task = new Task(maxTaskId, taskText);
+
         toDoTasks.add(task);
         maxTaskId++;
     }
@@ -89,10 +90,12 @@ public class TaskManager {
 
     public void save(String filepath) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filepath)));
+
         for (Task toDoTask : toDoTasks)
             writer.write(toDoTask.toWrite() + "\n");
         for (Task completedTask : completedTasks)
             writer.write(completedTask.toWrite() + "\n");
+        
         writer.close();
     }
 
@@ -100,6 +103,7 @@ public class TaskManager {
         BufferedReader reader = new BufferedReader(new FileReader(new File(filepath)));
         String line = reader.readLine();
         int id;
+
         toDoTasks.clear();
         completedTasks.clear();
 
