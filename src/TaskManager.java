@@ -59,35 +59,6 @@ public class TaskManager {
             System.out.printf("No such task or it's already completed (id:%d)\n", taskId);
     }
 
-    public void printAllTasks() {
-        if (toDoTasks.size() + completedTasks.size() == 0)
-            System.out.println("You don't have any tasks!");
-        else {
-            printTODOTasks();
-            printCompletedTasks();
-        }
-    }
-
-    public void printTODOTasks() {
-        if (toDoTasks.size() == 0)
-            System.out.println("There's no assigned tasks.");
-        else {
-            System.out.println("Assigned tasks:");
-            for (Task toDoTask : toDoTasks)
-                System.out.println(toDoTask.toString());
-        }
-    }
-
-    public void printCompletedTasks() {
-        if (completedTasks.size() == 0)
-            System.out.println("There's no completed tasks.");
-        else {
-            System.out.println("Completed tasks:");
-            for (Task completedTask : completedTasks)
-                System.out.println(completedTask.toString());
-        }
-    }
-
     public void save(String filepath) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filepath)));
 
@@ -95,7 +66,7 @@ public class TaskManager {
             writer.write(toDoTask.toWrite() + "\n");
         for (Task completedTask : completedTasks)
             writer.write(completedTask.toWrite() + "\n");
-        
+
         writer.close();
     }
 
@@ -123,5 +94,13 @@ public class TaskManager {
         }
 
         reader.close();
+    }
+
+    public ArrayList<Task> getToDoTasks(){
+        return toDoTasks;
+    }
+
+    public ArrayList<Task> getCompletedTasks(){
+        return completedTasks;
     }
 }
